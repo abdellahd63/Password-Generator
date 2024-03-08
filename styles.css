@@ -17,6 +17,7 @@ body{
 
 }
 
+
 h2{
     color: white;
     font-size: 50px;
@@ -46,6 +47,12 @@ h2 span{
     outline: none;
     
 }
+
+.lenght{
+  color: white;
+}
+
+
 .selects{
     gap: 20px;
     display: flex;
@@ -93,6 +100,14 @@ input[type="checkbox"]:checked + label {
     color: #000319;
 }
 
+.btncontainer{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    margin: 10px 0px;
+}
+
 .btn{
     background-color: #00C6BD;
     color: #000319;
@@ -122,12 +137,63 @@ input[type="checkbox"]:checked + label {
     margin: 0px;
 }
 
-.copy{
+.Passordgenrated .copy{
     background-color: #00031920;
     cursor:pointer ;
     border-radius: 5px;
     padding:10px;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.Passordgenrated .copy:hover{
+  color: #000319;
+  background-color: #00C6BD;
+  
+
+}
+
+.Passordgenrated .copy :active{
+  background-color: #00031920;
+  
+
+}
+
+.Passordgenrated .copy::before{
+  content: "Copied";
+  position: absolute;
+  border-radius: 20px;
+  background-color: #00C6BD;
+  color: #000319;
+  padding: 5px 10px;
+  transform: translateY(-60px)  ;
+  display: none;
+  animation: display  2s ease-in-out;
+}
+
+.Passordgenrated .copy::after{
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #00C6BD;
+  color: white;
+  
+  transform: translateY(-30px) rotate(45deg)  ;
+  display: none;
+  animation: display  2s ease-in-out;
+  
+}
+
+.Passordgenrated .copy.active::after , .Passordgenrated .copy.active::before{
+
+  display: flex;
+  animation: display  2s ease-in-out;
+
+  
 }
 
 .range-wrap {
@@ -135,7 +201,8 @@ input[type="checkbox"]:checked + label {
     margin: 0 auto 3rem;
   }
   .range {
-    width: 100%;
+    width: 100vh;
+
   }
   .bubble {
     height: auto;
@@ -149,6 +216,7 @@ input[type="checkbox"]:checked + label {
     transform: translateX(-50%);
     cursor: pointer;
     z-index: 0;
+    pointer-events: none;
   }
   .bubble::after {
     content: "";
@@ -163,7 +231,7 @@ input[type="checkbox"]:checked + label {
 
 
 
-/* Keyframes for typing animation */
+
 @keyframes typing {
     from {
       width: 0;
@@ -173,7 +241,7 @@ input[type="checkbox"]:checked + label {
     }
   }
   
-  /* Styling for the container */
+  
   .typing-animation {
     overflow: hidden; 
     white-space: nowrap; 
@@ -181,9 +249,9 @@ input[type="checkbox"]:checked + label {
     animation: typing 3s steps(40, end); 
   }
   
-  /* Optional: Styling for text appearance */
+
   .typing-animation::after {
-    content: ""; /* Ensures the typing cursor is displayed */
+    content: ""; 
     display: inline-block;
     width: 1px;
     height: 1em;
@@ -191,9 +259,66 @@ input[type="checkbox"]:checked + label {
     animation: blink .7s infinite;
   }
   
-  /* Blink animation for the typing cursor */
+
   @keyframes blink {
     50% {
       opacity: 0;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    body{
+      padding: 10px;
+    }
+    .range {
+      width: 100%;
+  
+    }
+    h2 {
+        font-size: 20px;
+    }
+
+    .Passordgenrated {
+        padding: 3px 7px;
+    }
+
+    .Passordgenrated input {
+        font-size: 14px;
+    }
+
+    .selects {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    
+
+    }
+    .selects div{
+      width: 100%;
+      padding: 0px 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      
+    }
+
+    .selects div label {
+        font-size: 12px;
+    }
+
+
+    .btn {
+      width: auto;
+        font-size: 17px;
+        padding: 3px 10px;
+    }
+
+    .copy {
+        padding: 3px 6px;
+    }
+
+    .bubble {
+      padding: 3px 6px;
+        font-size: 14px;
+    }
+}

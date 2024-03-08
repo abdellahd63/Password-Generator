@@ -8,21 +8,29 @@
     <title>Password Generator</title>
 </head>
 <body>
-    <div >
+    <div class="container" >
         <h2 class="typing-animation">Generate a random <span>Password</span></h2>
+        
         <div class="Passordgenrated">
             <input id="Password" value="" placeholder="Password"/>
-            <div class="copy" onclick="copypassword()" >
+            <div id="copybtn" class="copy" onclick="copypassword()" >
                 <i class="fa fa-solid fa-copy" id="copy"></i>
             </div>
             
         </div>
 
+       
+
+        <div class="btncontainer">
+            <label for="range" class="lenght" > Password lenght : </label>
+        </div>
+
         <div class="selects">
-            <label for="range" > Password length : </label>
+
             <div class="range-wrap">
-                <input type="range" class="range">
-                <output class="bubble"></output>
+                
+                <input type="range" class="range" id="range" name="range" max="16" min="0">
+                <output class="bubble" ></output>
             </div>
 
         </div>
@@ -50,11 +58,15 @@
            
         </div>
 
-        <div class="btn" id="Generate" onclick="createRandomPassword()">
-            <i class="fa fa-solid fa-bolt" ></i>
+        <div class="btncontainer">
+            <div class="btn" id="Generate" onclick="createRandomPassword()">
+                <i class="fa fa-solid fa-bolt" ></i>
 
-            <h3>Generate</h3>
+                <h3>Generate</h3>
+            </div>
         </div>
+
+        
     </div>
     <script>
         const generatedpassword=document.getElementById("Password");
@@ -98,7 +110,7 @@
 
         function createRandomPassword(){
 
-            const length=8;
+            const length=range.value-1;
             let password ="";
             let  all="";
             all += uppercase_el.checked ? Maj : "";
@@ -117,6 +129,11 @@
         function copypassword(){
             generatedpassword.select();
             document.execCommand("copy");
+            copybtn.classList.add("active");
+            window.getSelection().removeAllRanges();
+            setTimeout(() => {
+                copybtn.classList.remove("active");
+            }, 2000);
         }
     </script>
 </body>
