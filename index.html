@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Password Generator</title>
+</head>
+<body>
+    <div >
+        <h2 class="typing-animation">Generate a random <span>Password</span></h2>
+        <div class="Passordgenrated">
+            <input id="Password" value="" placeholder="Password"/>
+            <div class="copy" onclick="copypassword()" >
+                <i class="fa fa-solid fa-copy" id="copy"></i>
+            </div>
+            
+        </div>
+
+        <div class="selects">
+            <label for="range" > Password length : </label>
+            <div class="range-wrap">
+                <input type="range" class="range">
+                <output class="bubble"></output>
+            </div>
+
+        </div>
+        
+        
+
+        <div class="selects">
+            <div>
+                <label for="upercase" > Include uppercase "ABC" : </label>
+                <input type="checkbox" id="upercase" checked />
+            </div>
+            <div>
+                <label for="lowercase" > Include lowercase "abc" : </label>
+                <input type="checkbox" id="lowercase" checked/>
+
+            </div>
+            <div>
+                <label for="number" > Include number "123" : </label>
+                <input type="checkbox" id="number" checked/>
+            </div>
+            <div>
+                <label for="symbole"> Include symboles "$%^" : </label>
+                <input type="checkbox" id="symbole" checked/>
+            </div>
+           
+        </div>
+
+        <div class="btn" id="Generate" onclick="createRandomPassword()">
+            <i class="fa fa-solid fa-bolt" ></i>
+
+            <h3>Generate</h3>
+        </div>
+    </div>
+    <script>
+        const generatedpassword=document.getElementById("Password");
+
+        const uppercase_el=document.querySelector("#upercase");
+        const lowercase_el=document.querySelector("#lowercase");
+        const symbole_el=document.querySelector("#symbole");
+        const numbercase_el=document.querySelector("#number");
+
+        const lenght_tf=document.getElementById("passwordlenght");
+        const range=document.getElementById("range");
+
+        const Maj="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const Min="abcdefghijklmnopqrstuvwxyz";
+        const number="1234567890";
+        const symbole="@#$%^&*()_+|[]./,?><!{}=-"
+
+        const allRanges = document.querySelectorAll(".range-wrap");
+        allRanges.forEach(wrap => {
+        const range = wrap.querySelector(".range");
+        const bubble = wrap.querySelector(".bubble");
+
+        range.addEventListener("input", () => {
+            setBubble(range, bubble);
+        });
+        setBubble(range, bubble);
+        });
+
+        function setBubble(range, bubble) {
+        const val = range.value;
+        const min = range.min ? range.min : 0;
+        const max = range.max ? range.max : 100;
+        const newVal = Number(((val - min) * 100) / (max - min));
+        bubble.innerHTML = val;
+
+        // Sorta magic numbers based on size of the native UI thumb
+        bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+        }
+
+        
+
+        function createRandomPassword(){
+
+            const length=8;
+            let password ="";
+            let  all="";
+            all += uppercase_el.checked ? Maj : "";
+            all += lowercase_el.checked ? Min : "";
+            all += symbole_el.checked ? symbole : "";
+            all += numbercase_el.checked ? number : "";
+                
+            for(let i=0; i<=length;i++){
+                let rand=Math.floor(Math.random()*all.length);
+                password+=all.substring(rand, rand+1);
+            }
+            console.log(password);
+            generatedpassword.value=password;
+        }
+
+        function copypassword(){
+            generatedpassword.select();
+            document.execCommand("copy");
+        }
+    </script>
+</body>
+
+</html>
